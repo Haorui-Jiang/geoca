@@ -7,5 +7,10 @@ def hello_world():
     print("Hello World!")
 
 def random_number():
+    """Generate a random number.
+
+    Returns:
+        float: A random number.
+    """
     import random
     return random.random()
