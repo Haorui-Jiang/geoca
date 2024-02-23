@@ -82,4 +82,4 @@ nav:
     - Examples:
         - examples/intro.ipynb
     - API Reference:
-        - common module: common.md
+        - cellularautomata module: cellularautomata.md
