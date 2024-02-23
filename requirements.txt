@@ -1,2 +1,8 @@
+pip
 numpy
+<<<<<<< HEAD
 random
+=======
+rasterio
+random
+>>>>>>> 370412a46958f8c68017de2d83d2f327e511ea68
