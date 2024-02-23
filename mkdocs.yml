@@ -82,4 +82,5 @@ nav:
     - Examples:
         - examples/intro.ipynb
     - API Reference:
+        - rasterconvert module: rasterconvert.md
         - cellularautomata module: cellularautomata.md
