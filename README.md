@@ -10,13 +10,13 @@
 
 ## Features
 
-- Read raster data from a file, convert the data into a Python list. 
-- Create a raster template based on the input raster, and replace the data from list into the new raster. 
+- Read raster data from a file, convert the data into a Python list.
+- Create a raster template based on the input raster, and replace the data from list into the new raster.
 - Running CA models based on raster data to analyze population and other resource migration.
 
 ## File Template
 
-- [cookiecutter-pypackage](): Cookiecutter template creating a Python package with mkdocs.
+- [cookiecutter-pypackage](https://github.com/opengeos/cookiecutter-pypackage): Cookiecutter template creating a Python package with mkdocs.
 
 ## Acknowledgement
 
