@@ -4,7 +4,7 @@ The RasterConverter module provides a set of functions for efficient data conver
 """
 
 import numpy as np
-from osgeo import gdal
+import rasterio
 
 def raster_list(file_path):
     """
@@ -17,28 +17,35 @@ def raster_list(file_path):
         list: Raster data as a Python list with NoData values converted to None.
     """
     # Open the raster file
-    dataset = gdal.Open(file_path)
+    dataset = rasterio.open(file_path)
 
     # Check if the dataset was opened successfully
     if dataset is None:
         raise Exception("Failed to open the raster file.")
 
     # Get the raster band
-    band = dataset.GetRasterBand(1)
+    band = dataset.read(1)
 
     # Get the NoData value
-    nodata_value = band.GetNoDataValue()
+    nodata_value = dataset.nodata
 
-    # Read the raster data as a NumPy array
-    raster_data = band.ReadAsArray()
+    # 获取栅格数据的行数和列数
+    rows, cols = band.shape
+
+    # 将栅格数据转换为矩阵
+    raster_matrix = band.reshape(rows, cols)
+
+    # 将数据类型转换为 object 类型，以支持存储 None
+    raster_matrix = raster_matrix.astype(object)
 
     # Convert NoData values to None
-    raster_data = np.where(raster_data == nodata_value, None, raster_data)
+    raster_matrix[raster_matrix == nodata_value] = None
 
     # Convert NumPy array to a Python list
-    data_list = raster_data.tolist()
+    raster_list = [[raster_matrix[row][col] for col in range(cols)] for row in range(rows)]
 
-    return data_list
+    return raster_list
+
 
 def process_raster_data(input_raster_path, output_raster_path, new_data):
     """
@@ -53,40 +60,20 @@ def process_raster_data(input_raster_path, output_raster_path, new_data):
         None
     """
     # Open the original raster dataset
-    input_raster = gdal.Open(input_raster_path, gdal.GA_ReadOnly)
+    input_raster = rasterio.open(input_raster_path)
 
-    # Read basic information from the original raster dataset
-    projection = input_raster.GetProjection()
-    geotransform = input_raster.GetGeoTransform()
-    band_count = input_raster.RasterCount
-    data_type = input_raster.GetRasterBand(1).DataType
+    # Create a new raster from the original raster dataset
+    output_raster = rasterio.open(output_raster_path, "w", driver="GTiff",
+                                  height=input_raster.height, width=input_raster.width, count=1,
+                                  dtype="int16", crs=input_raster.crs, transform=input_raster.transform,
+                                  nodata=0)
 
-    # Create a new raster dataset
-    driver = gdal.GetDriverByName("GTiff")
-    output_raster = driver.Create(output_raster_path, input_raster.RasterXSize, input_raster.RasterYSize, band_count, data_type)
-
-    # Set the projection and geotransform parameters
-    output_raster.SetProjection(projection)
-    output_raster.SetGeoTransform(geotransform)
-
-    input_band = input_raster.GetRasterBand(1)
-    output_band = output_raster.GetRasterBand(1)
-    array = input_band.ReadAsArray()
-
-    # Replace pixel values with new data
-    for i in range(array.shape[0]):
-        for j in range(array.shape[1]):
-            array[i, j] = new_data[i][j]
-    
-    # output_array = output_array.astype(int)   # 将矩阵数据格式转换为整数
-    output_band.WriteArray(array)
-
-    # Set specific values to NoData
-    no_data_value = 0
-    output_raster.GetRasterBand(1).SetNoDataValue(no_data_value)
+    # Replace pixel values with new data，and set the NoData value to 0
+    masked_array = new_data == 0
+    output_raster.write(np.array(new_data), 1, masked=masked_array)
 
     print(f"Processed raster data saved to {output_raster_path}.")
 
-    # Close the datasets
-    input_raster = None
-    output_raster = None
+    # 关闭数据集
+    input_raster.close()
+    output_raster.close()
