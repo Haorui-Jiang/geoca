@@ -1,3 +1,3 @@
 """Main module."""
 
-from cellularautomata import *
+from geoca.cellularautomata import *
