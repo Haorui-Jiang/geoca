@@ -1,4 +1,0 @@
- 
-# geoca module
-
-::: geoca.geoca

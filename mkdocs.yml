@@ -82,5 +82,4 @@ nav:
     - Examples:
         - examples/intro.ipynb
     - API Reference:
-          - geoca module: geoca.md
-          - common module: common.md
+        - common module: common.md
