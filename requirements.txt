@@ -1,3 +1,4 @@
+pip
 numpy
-rasterio>=1.2.0
+rasterio
 random
