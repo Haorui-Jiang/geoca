@@ -3,7 +3,7 @@
 [![image](https://img.shields.io/pypi/v/geoca.svg)](https://pypi.python.org/pypi/geoca)
 [![image](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<img src="assets/logo.png" alt="logo" style="zoom:50%;" />
+<img src="assets/logo_long.png" alt="logo" style="zoom:30%;" />
 
 **A Python module for CA models based on geo-raster data**
 
