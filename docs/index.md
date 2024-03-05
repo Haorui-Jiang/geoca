@@ -3,6 +3,8 @@
 [![image](https://img.shields.io/pypi/v/geoca.svg)](https://pypi.python.org/pypi/geoca)
 [![image](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+<img src="assets/logo.png" alt="logo" style="zoom:50%;" />
+
 **A Python module for CA models based on geo-raster data**
 
 - Free software: MIT License
@@ -10,6 +12,6 @@
 
 ## Features
 
-- Read raster data from a file, convert the data into a Python list. 
-- Create a raster template based on the input raster, and replace the data from list into the new raster. 
+- Read raster data from a file, convert the data into a Python list.
+- Create a raster template based on the input raster, and replace the data from list into the new raster.
 - Running CA models based on raster data to analyze population and other resource migration.
