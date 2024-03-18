@@ -80,7 +80,8 @@ nav:
     - Changelog: changelog.md
     - Report Issues: https://github.com/Haorui-Jiang/geoca/issues
     - Examples:
-        - examples/CA.ipynb
+        - examples/01_CA.ipynb
+        - examples/02_multiRaster_listDict.ipynb
     - API Reference:
         - rasterconvert module: rasterconvert.md
         - cellularautomata module: cellularautomata.md
