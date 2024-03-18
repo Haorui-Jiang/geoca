@@ -54,8 +54,7 @@ def migrate_population(data_list, population):
             highest_neighbors = [(r, c) for r, c in neighbors if data_list[r][c] == max_value]
 
             target_row, target_col = random.choice(highest_neighbors)
-
-            # Add a feature that only 50% of the population will migrate each time, with a minimum of 1 person always migrating
+            
             migrated_population = population[row][col]
             
             new_population[target_row][target_col] += migrated_population
