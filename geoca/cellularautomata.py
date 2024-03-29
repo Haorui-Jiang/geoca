@@ -31,10 +31,10 @@ def get_neighbors(row_now, col_now, data_list):
 # Migrate population function
 def migrate_population(data_list, population):
     """
-    Migrate population based on raster data and initial population count at each pixel.
+    Population migration to the neighborhood with the highest raster pixel value.
 
     Args:
-        data_list (list): A 2D array representing the data converted from raster data.
+        data_list (list): A list converted from raster data that elements are raster pixel values.
         population (list): A list storing the initial population count of each pixel.
 
     Returns:

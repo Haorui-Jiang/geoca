@@ -137,11 +137,17 @@ def process_raster_data(input_raster_path, output_raster_path, new_data, nodata_
     # Open the original raster dataset
     input_raster = rasterio.open(input_raster_path)
 
+    # Set the NoData parameter of the output raster
+    nodata_raster = input_raster.nodata
+    # If nodata_value is not None, set the nodata_raster to the value of nodata_value
+    if nodata_value is not None:
+        nodata_raster = nodata_value
+
     # Create a new raster from the original raster dataset
     output_raster = rasterio.open(output_raster_path, "w", driver="GTiff",
                                   height=input_raster.height, width=input_raster.width, count=1,
                                   dtype=input_raster.dtypes[0], crs=input_raster.crs, transform=input_raster.transform,
-                                  nodata=input_raster.nodata)
+                                  nodata=nodata_raster)
 
     # Replace pixel values with new data，and set the NoData value
     masked_array = new_data == nodata_value
