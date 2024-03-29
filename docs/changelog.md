@@ -23,3 +23,9 @@
 
 - Reads multiple raster data (.tif) from a folder and stores it in a dictionary.
 - Reorganizes data from a list dictionary representing multiple raster data.
+
+## v0.0.5 - 2024.3.29
+
+**Improvement**:
+
+- Fix some codes for exporting raster data.
