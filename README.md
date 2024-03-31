@@ -10,11 +10,9 @@
 
 ## Features
 
-- Read raster data from a file, convert the data into a Python list.
-- Create a raster template based on the input raster, and replace the data from list into the new raster.
+- Read raster data from a file and convert the data to a format such as a Python list.
+- Creates a raster template from the input raster data and uniformly replaces the data in the corresponding position of that raster template.
 - Running CA models based on raster data to analyze population and other resource migration.
-- Reads multiple raster data (.tif) from a folder and stores it in a dictionary.
-- Reorganizes data from a list dictionary representing multiple raster data.
 
 ## File Template
 
