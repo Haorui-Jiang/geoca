@@ -3,8 +3,6 @@
 [![image](https://img.shields.io/pypi/v/geoca.svg)](https://pypi.python.org/pypi/geoca)
 [![image](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<img src="assets/logo_long.png" alt="logo" style="zoom:30%;" />
-
 **基于地理栅格数据的 CA 模型 Python 模块**
 
 - 开源许可证：MIT License
