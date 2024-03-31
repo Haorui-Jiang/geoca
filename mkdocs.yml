@@ -9,17 +9,17 @@ copyright: "Copyright &copy; 2024 - 2024 Haorui Jiang"
 theme:
     palette:
         - scheme: default
-          #   primary: blue
-          #   accent: indigo
-          toggle:
-              icon: material/toggle-switch-off-outline
-              name: Switch to dark mode
+            #   primary: blue
+            #   accent: indigo
+            toggle:
+                icon: material/toggle-switch-off-outline
+                name: Switch to dark mode
         - scheme: slate
-          primary: indigo
-          accent: indigo
-          toggle:
-              icon: material/toggle-switch
-              name: Switch to light mode
+            primary: indigo
+            accent: indigo
+            toggle:
+                icon: material/toggle-switch
+                name: Switch to light mode
     name: material
     icon:
         repo: fontawesome/brands/github
@@ -41,16 +41,46 @@ plugins:
     - mkdocstrings
     - git-revision-date
     - git-revision-date-localized:
-          enable_creation_date: true
-          type: timeago
+        enable_creation_date: true
+        type: timeago
     # - pdf-export
     - mkdocs-jupyter:
-          include_source: True
-          ignore_h1_titles: True
-          execute: False
-          allow_errors: false
-          ignore: ["conf.py"]
-          execute_ignore: ["*ignore.ipynb"]
+        include_source: True
+        ignore_h1_titles: True
+        execute: False
+        allow_errors: false
+        ignore: ["conf.py"]
+        execute_ignore: ["*ignore.ipynb"]
+    - i18n:
+        languages:
+            zh-CN: "简体中文"
+            en: "English"
+        default_language: "en"
+        no_translation:
+            zh-CN: "此页面未翻译成简体中文。"
+            en: "This page isn't translated to English."
+        translate_nav:
+        zh-CN:
+            Home: "首页"
+            Installation: "安装"
+            Usage: "使用方法"
+            Contributing: "贡献"
+            FAQ: "常见问题解答"
+            Changelog: "版本更新日志"
+            Report Issues: "报告议题"
+            Examples: "代码示例"
+            API Reference: "API参考"
+        en:
+            Home: "Home"
+            Installation: "Installation"
+            Usage: "Usage"
+            Contributing: "Contributing"
+            FAQ: "FAQ"
+            Changelog: "Changelog"
+            Report Issues: "Report Issues"
+            Examples: "Examples"
+            API Reference: "API Reference"
+
           
 markdown_extensions:
     - admonition
@@ -62,14 +92,31 @@ markdown_extensions:
     - md_in_html
     - pymdownx.superfences
     - pymdownx.highlight:
-          linenums: true
+        linenums: true
     - toc:
-          permalink: true
+        permalink: true
 
-# extra:
-#     analytics:
-#         provider: google
-#         property: UA-XXXXXXXXX-X
+extra:
+    # analytics:
+    #     provider: google
+    #     property: UA-XXXXXXXXX-X
+    # Default mkdocs-material alternate links for untranslated pages
+    # https://squidfunk.github.io/mkdocs-material/setup/changing-the-language/#site-language-selector
+    # For translated pages the language name is replaced by the string configured in i18n plugin
+    # secction and link is replaced by the link to the translated page
+    alternate:
+        - name: "English (Home)"
+        link: ""
+        lang: en
+
+        - name: "Català (Inici)"
+        link: index.ca/
+        lang: ca
+
+        - name: "Castellano (Inicio)"
+        link: index.es/
+        lang: es
+
 
 nav:
     - Home: index.md

@@ -25,5 +25,6 @@ mkdocs-pdf-export-plugin
 mkdocstrings 
 mkdocstrings-crystal
 mkdocstrings-python-legacy
+mkdocs-i18n
 pygments
 pymdown-extensions
