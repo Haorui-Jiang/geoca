@@ -57,18 +57,22 @@ plugins:
           en: "This page isn't translated to English."
         translate_nav:
           zh:
+            Home: "首页"
             Installation: "安装"
             Usage: "使用方法"
             Contributing: "贡献"
             FAQ: "常见问题解答"
+            Changelog: "更新日志"
             Report Issues: "报告议题"
             Examples: "代码示例"
             API Reference: "API参考"
           en:
+            Home: "Home"
             Installation: "Installation"
             Usage: "Usage"
             Contributing: "Contributing"
             FAQ: "FAQ"
+            Changelog: "Changelog"
             Report Issues: "Report Issues"
             Examples: "Examples"
             API Reference: "API Reference"
@@ -103,14 +107,16 @@ extra:
           lang: zh
 
 nav:
-    - index.md
-    - index.zh.md
-    - changelog.md
-    - changelog.zh.md
+    - Home:
+        - index.md
+        - index.zh.md
     - Installation: installation.md
     - Usage: usage.md
     - Contributing: contributing.md
     - FAQ: faq.md
+    - Changelog:
+        - changelog.md
+        - changelog.zh.md
     - Report Issues: https://github.com/Haorui-Jiang/geoca/issues
     - Examples:
         - examples/01_CA.ipynb
