@@ -40,10 +40,6 @@ plugins:
     - search
     - mkdocstrings
     - git-revision-date
-    - git-revision-date-localized:
-        enable_creation_date: true
-        type: timeago
-    # - pdf-export
     - mkdocs-jupyter:
         include_source: True
         ignore_h1_titles: True
@@ -55,7 +51,7 @@ plugins:
         languages:
           zh: "简体中文"
           en: "English"
-        default_language: 'en'
+        default_language: "en"
         no_translation:
           zh: "此页面未翻译为简体中文。"
           en: "This page isn't translated to English."
@@ -80,8 +76,10 @@ plugins:
             Report Issues: "Report Issues"
             Examples: "Examples"
             API Reference: "API Reference"
+    - git-revision-date-localized:
+        enable_creation_date: true
+        type: timeago
 
-          
 markdown_extensions:
     - admonition
     - abbr
