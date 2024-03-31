@@ -23,8 +23,8 @@ theme:
     name: material
     icon:
         repo: fontawesome/brands/github
-    # logo: assets/logo.png
-    # favicon: assets/favicon.png
+    logo: assets/logo.png
+    favicon: assets/favicon.png
     features:
         - navigation.instant
         - navigation.tracking
@@ -47,7 +47,7 @@ plugins:
     - mkdocs-jupyter:
           include_source: True
           ignore_h1_titles: True
-          execute: True
+          execute: False
           allow_errors: false
           ignore: ["conf.py"]
           execute_ignore: ["*ignore.ipynb"]
@@ -80,7 +80,8 @@ nav:
     - Changelog: changelog.md
     - Report Issues: https://github.com/Haorui-Jiang/geoca/issues
     - Examples:
-        - examples/intro.ipynb
+        - examples/01_CA.ipynb
+        - examples/02_multiRaster_listDict.ipynb
     - API Reference:
-          - geoca module: geoca.md
-          - common module: common.md
+        - rasterconvert module: rasterconvert.md
+        - cellularautomata module: cellularautomata.md
