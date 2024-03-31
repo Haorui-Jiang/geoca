@@ -100,7 +100,9 @@ markdown_extensions:
 #         property: UA-XXXXXXXXX-X
 
 nav:
-    - Home: index.md
+    - Home:
+        - index.md
+        - index.zh.md
     - Installation: installation.md
     - Usage: usage.md
     - Contributing: contributing.md
