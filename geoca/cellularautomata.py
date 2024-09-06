@@ -55,6 +55,8 @@ def migrate_population(data_list, population):
 
             target_row, target_col = random.choice(highest_neighbors)
             
+            if not population[row][col]:
+                continue  # Skip invalid regions
             migrated_population = population[row][col]
             
             new_population[target_row][target_col] += migrated_population
@@ -62,13 +64,13 @@ def migrate_population(data_list, population):
     
     return new_population
 
-def run_ca_iterations(iterations, data_list, population_num=10):
+def run_iterations_num(iterations, data_list, population_num=10):
     """
-    Runs a cellular automata simulation for migration of population based on raster data.
+    Running a cellular automata using a uniform initial population count to simulate population migration based on a raster of environmental data.
 
     Args:
         iterations (int): The number of iterations to run the simulation.
-        data_list (list): A 2D array representing the data converted from raster data.
+        data_list (list): A 2D array converted from a raster of environmental data.
         population_num (int): The initial population count at each pixel (default: 10).
 
     Returns:
@@ -81,3 +83,22 @@ def run_ca_iterations(iterations, data_list, population_num=10):
         print(f"Iteration {i + 1} is complete.")
 
     return population
+
+def run_iterations_pop(iterations, data_list, population_list):
+    """
+    Running a cellular automata using an initial population size raster to simulate population migration based on a raster of environmental data.
+
+    Args:
+        iterations (int): The number of iterations to run the simulation.
+        data_list (list): A 2D array converted from a raster of environmental data.
+        population_list (list): A 2D array converted from an initial population size raster.
+
+    Returns:
+        list: A 2D list representing the population distribution after running the simulation.
+    """
+
+    for i in range(iterations):
+        population_list = migrate_population(data_list, population_list)
+        print(f"Iteration {i + 1} is complete.")
+
+    return population_list
