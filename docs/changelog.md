@@ -29,3 +29,13 @@
 **Improvement**:
 
 - Fix some codes for exporting raster data.
+
+## v0.0.6 - 2024.9.6
+
+**Improvement**:
+
+- Modify the names of some functions.
+
+**New Features**:
+
+- Running a cellular automata using an initial population size raster.
