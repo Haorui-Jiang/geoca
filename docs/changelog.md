@@ -39,3 +39,15 @@
 **New Features**:
 
 - Running a cellular automata using an initial population size raster.
+
+## v0.0.7 - 2024.9.11
+
+**Improvement**:
+
+- Modify the names of some functions.
+- The direction of migration was reduced from eight to four (only east, west, south and north were retained).
+
+**New Features**:
+
+- The population can be dispersed and migrated to various neighboring areas based on the size of the raster pixel values.
+- A proportion of the population can be focused and migrated to the most suitable areas.
