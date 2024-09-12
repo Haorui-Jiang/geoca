@@ -40,9 +40,6 @@ plugins:
     - search
     - mkdocstrings
     - git-revision-date
-    - git-revision-date-localized:
-        enable_creation_date: true
-        type: timeago
     - mkdocs-jupyter:
         include_source: True
         ignore_h1_titles: True
@@ -79,6 +76,9 @@ plugins:
             Report Issues: "Report Issues"
             Examples: "Examples"
             API Reference: "API Reference"
+    - git-revision-date-localized:
+        enable_creation_date: true
+        type: timeago
 
 markdown_extensions:
     - admonition
