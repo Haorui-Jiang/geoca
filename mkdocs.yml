@@ -4,7 +4,7 @@ site_author: Haorui-Jiang
 site_url: https://Haorui-Jiang.github.io/geoca
 repo_url: https://github.com/Haorui-Jiang/geoca
 
-copyright: "Copyright &copy; 2024 - 2024 Haorui Jiang"
+copyright: "Copyright &copy; 2024 Haorui Jiang"
 
 theme:
     palette:
@@ -40,6 +40,9 @@ plugins:
     - search
     - mkdocstrings
     - git-revision-date
+    - git-revision-date-localized:
+        enable_creation_date: true
+        type: timeago
     - mkdocs-jupyter:
         include_source: True
         ignore_h1_titles: True
@@ -76,9 +79,6 @@ plugins:
             Report Issues: "Report Issues"
             Examples: "Examples"
             API Reference: "API Reference"
-    - git-revision-date-localized:
-        enable_creation_date: true
-        type: timeago
 
 markdown_extensions:
     - admonition

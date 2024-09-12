@@ -5,11 +5,8 @@ The cellularautomata module implements a cellularautomata model for analyzing th
 
 import random
 
-# Define eight directions of movement
-directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-
 # Get coordinates of neighbors in eight directions
-def get_neighbors(row_now, col_now, data_list):
+def get_neighbors(row_now, col_now, data_list, direction_num=4):
     """
     Get neighboring valid coordinates given a row and column index in a 2D data list.
 
@@ -17,10 +14,16 @@ def get_neighbors(row_now, col_now, data_list):
         row_now (int): The current row index.
         col_now (int): The current column index.
         data_list (list): A 2D array representing the data converted from raster data.
+        direction_num (int): The number of migration directions (default: 4). Only two values, 4 and 8, are allowed; if any other value is entered, it is recognized as the default 4 direction.
 
     Returns:
         list: A list of neighboring valid coordinates.
     """
+
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    if direction_num == 8:
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (-1, -1), (1, -1), (-1, 1)]
+    
     neighbors = []
     for dr, dc in directions:
         new_row, new_col = row_now + dr, col_now + dc
@@ -29,13 +32,14 @@ def get_neighbors(row_now, col_now, data_list):
     return neighbors
 
 # Migrate population function
-def migrate_population_focus(data_list, population, proportion=1):
+def migrate_population_focus(data_list, population, direction_num=4, proportion=1):
     """
     The population is focused towards the most suitable nearby migration areas based on the raster pixel values.
 
     Args:
         data_list (list): A list converted from raster data that elements are raster pixel values.
         population (list): A list storing the initial population count of each pixel.
+        direction_num (int): The number of migration directions (default: 4). Only two values, 4 and 8, are allowed; if any other value is entered, it is recognized as the default 4 direction.
         proportion (float): The proportion of population to migrate (default: 1). The proportion ranges from 0 to 1, with a proportion of 1 for complete migration and 0.5 for 50 percent migration.
 
     Returns:
@@ -47,7 +51,7 @@ def migrate_population_focus(data_list, population, proportion=1):
         for col in range(len(data_list[0])):
             if not data_list[row][col]:
                 continue  # Skip invalid regions
-            neighbors = get_neighbors(row, col, data_list)
+            neighbors = get_neighbors(row, col, data_list, direction_num)
             if not neighbors:
                 continue  # Skip if no valid neighbors
             
@@ -66,13 +70,14 @@ def migrate_population_focus(data_list, population, proportion=1):
     return new_population
 
 # Migrate population function
-def migrate_population_disperse(data_list, population, proportion=[0.5, 0.25, 0.15, 0.05]):
+def migrate_population_disperse(data_list, population, direction_num=4, proportion=[0.5, 0.25, 0.15, 0.05]):
     """
     The population is dispersed and migrates to the neighborhood based on the raster pixel values.
 
     Args:
         data_list (list): A list converted from raster data that elements are raster pixel values.
         population (list): A list storing the initial population count of each pixel.
+        direction_num (int): The number of migration directions (default: 4). Only two values, 4 and 8, are allowed; if any other value is entered, it is recognized as the default 4 direction.
         proportion (list): A list of the proportion of the population that migrated to each neighboring pixel, ordered from highest to lowest suitability for migration. The proportion ranges from 0 to 1, with a proportion of 1 for complete migration and 0.5 for 50 percent migration.
 
     Returns:
@@ -84,8 +89,7 @@ def migrate_population_disperse(data_list, population, proportion=[0.5, 0.25, 0.
         for col in range(len(data_list[0])):
             if not data_list[row][col]:
                 continue  # Skip invalid regions
-            
-            neighbors = get_neighbors(row, col, data_list)
+            neighbors = get_neighbors(row, col, data_list, direction_num)
             if not neighbors:
                 continue  # Skip if no valid neighbors
             
@@ -110,7 +114,7 @@ def migrate_population_disperse(data_list, population, proportion=[0.5, 0.25, 0.
     
     return new_population
 
-def run_iterations_num(iterations, data_list, population_num=10, type_migration="focus", migration_proportion=1):
+def run_iterations_num(iterations, data_list, population_num=10, direction_num=4, type_migration="focus", migration_proportion=1):
     """
     Running a cellular automata using a uniform initial population count to simulate population migration based on a raster of environmental data.
 
@@ -118,6 +122,7 @@ def run_iterations_num(iterations, data_list, population_num=10, type_migration=
         iterations (int): The number of iterations to run the simulation.
         data_list (list): A 2D array converted from a raster of environmental data.
         population_num (int): The initial population count at each pixel (default: 10).
+        direction_num (int): The number of migration directions (default: 4). Only two values, 4 and 8, are allowed; if any other value is entered, it is recognized as the default 4 direction.
         type_migration (str): The type of migration to use, either "focus" or "disperse" (default: "focus").
         migration_proportion (float or list): The proportion of population to migrate (default: 1). The proportion ranges from 0 to 1, with a proportion of 1 for complete migration and 0.5 for 50 percent migration.
 
@@ -128,14 +133,14 @@ def run_iterations_num(iterations, data_list, population_num=10, type_migration=
 
     for i in range(iterations):
         if type_migration == "focus":
-            population = migrate_population_focus(data_list, population, migration_proportion)
+            population = migrate_population_focus(data_list, population, direction_num, migration_proportion)
         elif type_migration == "disperse":
-            population = migrate_population_disperse(data_list, population, migration_proportion)
+            population = migrate_population_disperse(data_list, population, direction_num, migration_proportion)
         print(f"Iteration {i + 1} is complete.")
 
     return population
 
-def run_iterations_pop(iterations, data_list, population_list, type_migration="focus", migration_proportion=1):
+def run_iterations_pop(iterations, data_list, population_list, direction_num=4, type_migration="focus", migration_proportion=1):
     """
     Running a cellular automata using an initial population size raster to simulate population migration based on a raster of environmental data.
 
@@ -143,6 +148,7 @@ def run_iterations_pop(iterations, data_list, population_list, type_migration="f
         iterations (int): The number of iterations to run the simulation.
         data_list (list): A 2D array converted from a raster of environmental data.
         population_list (list): A 2D array converted from an initial population size raster.
+        direction_num (int): The number of migration directions (default: 4). Only two values, 4 and 8, are allowed; if any other value is entered, it is recognized as the default 4 direction.
         type_migration (str): The type of migration to use, either "focus" or "disperse" (default: "focus").
         migration_proportion (float or list): The proportion of population to migrate (default: 1). The proportion ranges from 0 to 1, with a proportion of 1 for complete migration and 0.5 for 50 percent migration.
 
@@ -152,9 +158,9 @@ def run_iterations_pop(iterations, data_list, population_list, type_migration="f
 
     for i in range(iterations):
         if type_migration == "focus":
-            population_list = migrate_population_focus(data_list, population_list, migration_proportion)
+            population_list = migrate_population_focus(data_list, population_list, direction_num, migration_proportion)
         elif type_migration == "disperse":
-            population_list = migrate_population_disperse(data_list, population_list, migration_proportion)
+            population_list = migrate_population_disperse(data_list, population_list, direction_num, migration_proportion)
         print(f"Iteration {i + 1} is complete.")
 
     return population_list
