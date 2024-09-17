@@ -57,3 +57,9 @@
 **Improvement**:
 
 - Number of migration directions can be set (4 or 8).
+
+## v0.0.9 - 2024.9.17
+
+**New Features**:
+
+- Calculate the migration time based on the cost path raster and the environment raster.

@@ -22,4 +22,4 @@
 
 ## 致谢
 
-在此，我要对田纳西大学的 [吴秋生博士](https://github.com/giswqs) 表示诚挚的感谢。吴博士在 [YouTube](https://youtube.com/playlist?list=PLAxJ4-o7ZoPcD-6wZ2xY5bXuu48Scu8kq&si=dq_x-xUJZvoflVqy) 上发布的精彩教学内容极大地丰富了我的Python知识。在他细致入微的指导下，我得以逐步开发出geoca软件。衷心祝愿吴博士身体健康，工作顺利！
+在此，我要对田纳西大学的 [吴秋生博士](https://github.com/giswqs) 表示诚挚的感谢。吴博士在 [YouTube](https://youtube.com/playlist?list=PLAxJ4-o7ZoPcD-6wZ2xY5bXuu48Scu8kq&si=dq_x-xUJZvoflVqy) 上发布的精彩教学内容极大地丰富了我的 Python 知识。正是在他发布的教学课程视频的帮助下，我才得以逐步开发出 geoca 这个 Python 模块。衷心祝愿吴博士身体健康，工作顺利！

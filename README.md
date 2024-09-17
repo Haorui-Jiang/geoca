@@ -22,4 +22,4 @@ English [简体中文](README.zh.md)
 
 ## Acknowledgement
 
-Special thanks to [Dr. Qiusheng Wu](https://github.com/giswqs) from the University of Tennessee for his generous sharing. I have learned a great deal from [Dr. Wu&#39;s YouTube videos](https://youtube.com/playlist?list=PLAxJ4-o7ZoPcD-6wZ2xY5bXuu48Scu8kq&si=dq_x-xUJZvoflVqy), and with his guidance, I was able to develop geoca step by step. Once again, I express my deepest gratitude to Dr. Wu.
+Special thanks to [Dr. Qiusheng Wu](https://github.com/giswqs) from the University of Tennessee for his generous sharing. Dr. Wu has greatly enriched my knowledge of Python with his great tutorials on [YouTube](https://youtube.com/playlist?list=PLAxJ4-o7ZoPcD-6wZ2xY5bXuu48Scu8kq&si=dq_x-xUJZvoflVqy). It is with the help of his instructional videos that I have been able to develop geoca for Python. Once again, I express my deepest gratitude to Dr. Wu.

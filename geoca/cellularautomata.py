@@ -37,8 +37,8 @@ def migrate_population_focus(data_list, population, direction_num=4, proportion=
     The population is focused towards the most suitable nearby migration areas based on the raster pixel values.
 
     Args:
-        data_list (list): A list converted from raster data that elements are raster pixel values.
-        population (list): A list storing the initial population count of each pixel.
+        data_list (list): A 2D array converted from a raster of environmental data.
+        population (list): A 2D array converted from the initial population count of each pixel.
         direction_num (int): The number of migration directions (default: 4). Only two values, 4 and 8, are allowed; if any other value is entered, it is recognized as the default 4 direction.
         proportion (float): The proportion of population to migrate (default: 1). The proportion ranges from 0 to 1, with a proportion of 1 for complete migration and 0.5 for 50 percent migration.
 
@@ -75,8 +75,8 @@ def migrate_population_disperse(data_list, population, direction_num=4, proporti
     The population is dispersed and migrates to the neighborhood based on the raster pixel values.
 
     Args:
-        data_list (list): A list converted from raster data that elements are raster pixel values.
-        population (list): A list storing the initial population count of each pixel.
+        data_list (list): A 2D array converted from a raster of environmental data.
+        population (list): A 2D array converted from the initial population count of each pixel.
         direction_num (int): The number of migration directions (default: 4). Only two values, 4 and 8, are allowed; if any other value is entered, it is recognized as the default 4 direction.
         proportion (list): A list of the proportion of the population that migrated to each neighboring pixel, ordered from highest to lowest suitability for migration. The proportion ranges from 0 to 1, with a proportion of 1 for complete migration and 0.5 for 50 percent migration.
 
@@ -113,6 +113,71 @@ def migrate_population_disperse(data_list, population, direction_num=4, proporti
                 new_population[row][col] += population[row][col] - migrated_population
     
     return new_population
+
+# Migrate time function
+def migrate_time(data_list, cost_list):
+    """
+    Calculate the migration time based on the cost path raster and the environment raster.
+
+    Args:
+        data_list (list): A 2D array converted from a raster of environmental data.
+        cost_list (list): A 2D array converted from the cost path raster.
+
+    Returns:
+        tuple: A tuple containing the cumulative migration time, the number of iterations, and a list of environment raster values corresponding to the cost path raster.
+    """
+    iteration_count = 0  # Initialize the iteration counter
+    migration_time = 0  # Initialize migration time
+    positions_data_list = []  # Initialize the list of environment raster values corresponding to cost paths
+    
+    # In ArcGIS Pro, each least-cost path is assigned a value when encountered in the scanning process.
+    # The ending cell on the original source raster of a cost path receives 1, the first path receives 3.
+
+    # Find initial position (cost path raster pixel value = 1)
+    initial_positions = []
+    for r in range(len(cost_list)):
+        for c in range(len(cost_list[0])):
+            if cost_list[r][c] == 1:
+                initial_positions.append((r, c))
+                positions_data_list.append(data_list[r][c])
+
+    if len(initial_positions) != 1:
+        # Finds more than one or zero initial positions, exits the loop
+        raise RuntimeError("Error: The cost path raster should have and only have one initial position.")
+    
+    for initial_row, initial_col in initial_positions:
+        while True:
+            # Get cost path raster coordinates in eight directions around the initial position
+            neighbors = get_neighbors(initial_row, initial_col, cost_list, 8)
+            # Get the elements in the eight coordinates that have a cost path raster pixel value of 3
+            threes = [(r, c) for r, c in neighbors if cost_list[r][c] == 3]
+
+            iteration_count += 1    # Iterative counter accumulation
+            
+            # If the threes list has only one value, the program runs normally
+            if len(threes) == 1:
+                # Calculate migration time
+                target_row, target_col = threes[0]
+                migration_diff = data_list[initial_row][initial_col] - data_list[target_row][target_col]
+                migration_time += migration_diff + 30
+
+                # Adding environmental raster values for locations corresponding to cost paths
+                positions_data_list.append(data_list[target_row][target_col])
+                
+                # Update cost path list element values so that computed pixels are not subsequently re-read
+                cost_list[target_row][target_col] = 5
+                
+                # Update initial position
+                initial_row, initial_col = target_row, target_col
+            if len(threes) == 0:
+                # If no element with value 3 is found, exit the loop
+                print("Cost path raster traversal is complete.")
+                break
+            elif len(threes) > 1:
+                # Finds more than one element with a value of 3 and exits the loop
+                raise RuntimeError("Error: multiple cost path raster values exist around the initial position.")
+    
+    return migration_time, iteration_count, positions_data_list
 
 def run_iterations_num(iterations, data_list, population_num=10, direction_num=4, type_migration="focus", migration_proportion=1):
     """
