@@ -4,6 +4,7 @@ The cellularautomata module implements a cellularautomata model for analyzing th
 """
 
 import random
+from tqdm import tqdm
 
 # Get coordinates of neighbors in eight directions
 def get_neighbors(row_now, col_now, data_list, direction_num=4):
@@ -196,12 +197,11 @@ def run_iterations_num(iterations, data_list, population_num=10, direction_num=4
     """
     population = [[population_num for _ in range(len(data_list[0]))] for _ in range(len(data_list))]
 
-    for i in range(iterations):
+    for i in tqdm(range(iterations)):
         if type_migration == "focus":
             population = migrate_population_focus(data_list, population, direction_num, migration_proportion)
         elif type_migration == "disperse":
             population = migrate_population_disperse(data_list, population, direction_num, migration_proportion)
-        print(f"Iteration {i + 1} is complete.")
 
     return population
 
@@ -221,11 +221,10 @@ def run_iterations_pop(iterations, data_list, population_list, direction_num=4, 
         list: A 2D list representing the population distribution after running the simulation.
     """
 
-    for i in range(iterations):
+    for i in tqdm(range(iterations)):
         if type_migration == "focus":
             population_list = migrate_population_focus(data_list, population_list, direction_num, migration_proportion)
         elif type_migration == "disperse":
             population_list = migrate_population_disperse(data_list, population_list, direction_num, migration_proportion)
-        print(f"Iteration {i + 1} is complete.")
 
     return population_list

@@ -63,3 +63,9 @@
 **New Features**:
 
 - Calculate the migration time based on the cost path raster and the environment raster.
+
+## v0.0.10 - 2024.9.19
+
+**Improvement**:
+
+- Modify CA model output effect, add progress bar.
