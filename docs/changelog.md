@@ -69,3 +69,9 @@
 **Improvement**:
 
 - Modify CA model output effect, add progress bar.
+
+## v0.0.11 - 2024.9.20
+
+**Improvement**:
+
+- Fixed partial function modeling algorithm.

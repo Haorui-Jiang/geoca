@@ -159,7 +159,7 @@ def migrate_time(data_list, cost_list):
             if len(threes) == 1:
                 # Calculate migration time
                 target_row, target_col = threes[0]
-                migration_diff = data_list[initial_row][initial_col] - data_list[target_row][target_col]
+                migration_diff = data_list[target_row][target_col] - data_list[initial_row][initial_col]
                 migration_time += migration_diff + 30
 
                 # Adding environmental raster values for locations corresponding to cost paths
