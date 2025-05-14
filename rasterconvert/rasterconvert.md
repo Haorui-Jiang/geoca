@@ -1,3 +1,0 @@
-# rasterconvert module
-
-::: geoca.rasterconvert
